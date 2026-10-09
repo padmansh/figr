@@ -1,9 +1,21 @@
 {
   "name": "figr-frontend-assignment",
   "private": true,
-  "description": "Starter kit for the Figr frontend engineer assignment",
-  "engines": { "node": ">=18" },
+  "description": "Figr viewer: a board of live cross-origin previews with host-drawn overlays, layers panel and inspector",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
-    "backend": "node backend/server.js"
+    "start": "npm install --no-audit --no-fund && npm run dev",
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run backend\" \"npm -w frontend run dev\"",
+    "backend": "node backend/server.js",
+    "build": "npm -w frontend run build",
+    "typecheck": "npm -w frontend run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }
